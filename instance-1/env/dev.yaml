@@ -1,1 +1,3 @@
 message: "yo this is dev"
+image:
+  tag: 1.0.7
