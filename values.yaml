@@ -1,6 +1,0 @@
-replicaCount: 1
-
-image:
-  name: gcr.io/sandbox-20200610-98rxvk/static
-  pullPolicy: IfNotPresent
-  tag: "1"

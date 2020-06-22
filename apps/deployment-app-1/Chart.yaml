@@ -1,6 +1,6 @@
 apiVersion: v2
-name: static-chart
-description: Deploys the static application.
+name: my-app
+description: Deploys the application.
 
 # A chart can be either an 'application' or a 'library' chart.
 #

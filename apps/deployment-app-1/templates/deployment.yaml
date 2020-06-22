@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  labels:
+    app: deployment-app-1
+  name: deployment-app-1
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: deployment-app-1
+
+  template:
+    metadata:
+      labels:
+        app: deployment-app-1
+
+    spec:
+      containers:
+      - image: {{ .Values.image.name }}:{{ required ".Values.image.tag is required" .Values.image.tag }}
+        imagePullPolicy: IfNotPresent
+        name: deployment-app-1
+        env:
+          - name: CRASH_ON_BOOT
+            valueFrom:
+              configMapKeyRef:
+                optional: true
+                name: deployment-app-1-config-map
+                key: CRASH_ON_BOOT
+
+          - name: EXTRA
+            valueFrom:
+              configMapKeyRef:
+                optional: true
+                name: deployment-app-1-config-map
+                key: EXTRA
+
+          - name: CRASH_ON_RENDER
+            valueFrom:
+              configMapKeyRef:
+                optional: true
+                name: deployment-app-1-config-map
+                key: CRASH_ON_RENDER
+
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
