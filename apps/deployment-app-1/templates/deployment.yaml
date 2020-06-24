@@ -16,7 +16,8 @@ spec:
     metadata:
       labels:
         app: deployment-app-1
-
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum  }}
     spec:
       containers:
       - image: {{ .Values.image.name }}:{{ required ".Values.image.tag is required" .Values.image.tag }}
