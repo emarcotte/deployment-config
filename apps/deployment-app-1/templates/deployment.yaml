@@ -19,6 +19,12 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum  }}
     spec:
+
+      initContainers:
+      - name: secrets-init
+        image: doitintl/secrets-init:v0.2.11
+        command: ["secrets-init", "--provider", "google"]
+
       containers:
       - image: {{ .Values.image.name }}:{{ required ".Values.image.tag is required" .Values.image.tag }}
         imagePullPolicy: IfNotPresent
